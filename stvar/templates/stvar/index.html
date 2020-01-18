@@ -1,0 +1,21 @@
+{% extends "stvar/base.html" %}
+
+{% block content %}
+<h5>Pretrazi naziv, kategoriju ili grad</h5>
+    <form role="search" method="get" action="{% url 'stvar:index' %}">
+        <div class="form-group">
+            <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+        </div>
+        <button type="submit" class="btn btn-default"style="background-color:#D4F9FB">Search</button>
+    </form>
+<br>
+<h1>Proizvodi</h1>
+    <ul>
+        {% for stvar in stvari %}
+        <div onclick="location.href='detalji_kupi/{{stvar.id}}'" class="container-fluid" style="cursor:pointer; border:solid black 1px; margin:20px; background-color:#F9FBD4">
+            <li style="list-style-type:none"><h5>{{stvar.ime}}</h5></li>
+            <img src="{{stvar.slika.url}}" width="200" height="200" alt="img">
+        </div>
+        {% endfor %}
+    </ul>
+{% endblock content %}

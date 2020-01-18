@@ -1,0 +1,6 @@
+{% extends "stvar/detalji.html" %}
+
+{% block details %}
+    <a href="{% url 'stvar:izmeni_stvar' stvar.id %}"><button class="btn btn-default" type="button"style="background-color:#D4F9FB">Izmeni artikal</button></a>
+    <a href="{% url 'stvar:obrisi_stvar' stvar.id %}"><button class="btn btn-default" type="button"style="background-color:#D4F9FB">Obrisi artikal</button></a>
+{% endblock details %}

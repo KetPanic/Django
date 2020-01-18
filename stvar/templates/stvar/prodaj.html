@@ -1,0 +1,12 @@
+{% extends "stvar/base.html" %}
+
+{% block content %}
+<h1>Moji artikli za prodaju</h1>
+        {% for stvar in stvari %}
+        <div onclick="location.href='detalji_prodaj/{{stvar.id}}'" class="container-fluid" style="cursor:pointer; border:solid black 1px; margin:20px; background-color:#F9FBD4">
+            <li style="list-style-type:none"><h5>{{stvar.ime}}</h5></li>
+            <img src="{{stvar.slika.url}}" width="200" height="200" alt="img">
+        </div>
+        {% endfor %}
+    <a href="{% url 'stvar:dodajStvar' %}"><button class="btn btn-default" type="button" style="background-color:#D4F9FB">Dodaj novi artikal</button></a>
+{% endblock content %}

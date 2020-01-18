@@ -1,0 +1,13 @@
+{% extends "stvar/base.html" %}
+
+{% block content %}
+    <h1>Narucite artikal {{stvar.ime}}</h1>
+    <h5>Cena:</h5>
+    <p>{{stvar.cena}}</p>
+    <h5>Kategorija:</h5>
+    <p>{{stvar.kategorija}}</p>
+    <img src="{{stvar.slika.url}}" alt="img">
+    <h3>Unesite kontakt telefon i ime, prezime i adresu na koju zelite da proizvod bude dostavljen bude dostavljen</h3>
+    <textarea contenteditable="true" cols="10" rows="3"></textarea>
+    <a href="{% url 'stvar:obrisi_stvar' stvar.id %}"><button class="btn" type="button">Potvrdi kupovinu</button></a>
+{% endblock content %}

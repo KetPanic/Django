@@ -1,0 +1,5 @@
+{% extends "stvar/detalji.html" %}
+
+{% block details %}
+    <a href="{% url 'stvar:kupi_artikal' stvar.id %}"><button class="btn btn-default" type="button"style="background-color:#D4F9FB">Kupi artikal</button></a>
+{% endblock details %}

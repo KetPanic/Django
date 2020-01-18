@@ -1,0 +1,17 @@
+{% extends "stvar/base.html" %}
+
+{% block content %}
+    <h1>{{stvar.ime}}</h1>
+    <h5>Cena:</h5>
+    <p>{{stvar.cena}}</p>
+    <h5>Kategorija:</h5>
+    <p>{{stvar.kategorija}}</p>
+    <img src="{{stvar.slika.url}}" alt="img">
+    <h5>Opis:</h5>
+    <textarea readonly rows="5" cols="20">{{stvar.opis}}</textarea>
+    <h5>Grad:</h5>
+    <p>{{stvar.grad}}</p>
+    <h5>Korisnik:</h5>
+    <p>{{korisnik.username}}</p>
+    {% block details %}{% endblock details %}
+{% endblock content %}
