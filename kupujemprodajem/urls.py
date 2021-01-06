@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('stvar/', include('stvar.urls')),
+    path('', include('stvar.urls')),
 ]
 
 if settings.DEBUG:

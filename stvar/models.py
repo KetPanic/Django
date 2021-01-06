@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Stvar(models.Model):
@@ -14,3 +15,11 @@ class Stvar(models.Model):
     korisnik = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.ime
+
+class Ocene(models.Model):
+    ocena = models.IntegerField(default=None, validators=[MaxValueValidator(5), MinValueValidator(1)], null=True)
+    korisnik = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    proizvod = models.ForeignKey(Stvar, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.ocena)

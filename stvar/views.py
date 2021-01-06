@@ -2,12 +2,12 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .models import Stvar
+from .models import Stvar, Ocene
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
-from .forms import UserForm, StvarForm
+from .forms import UserForm, StvarForm, OceneFrom
 from django.contrib.auth import logout
 from django.db.models import Q
 
@@ -21,10 +21,10 @@ def firstOpen(request):
 
 def index(request):
     strana = True
-    sveStvari = Stvar.objects.all()
+    sveStvari = Stvar.objects.exclude(korisnik=request.user.id)
     query = request.GET.get("q")
     if query:
-        sveStvari = Stvar.objects.filter()
+        sveStvari = Stvar.objects.exclude(korisnik=request.user.id)
         sveStvari = sveStvari.filter(
             Q(ime__icontains=query) |
               Q(kategorija__icontains=query) |
@@ -141,7 +141,19 @@ def detaljiProdaj(request, id):
     korisnik = stvar.korisnik
     user = request.user
     #korisnik = User.objects.get(pk=ajdi)
-    return render(request, 'stvar/detalji_prodaj.html', {"stvar":stvar, "korisnik":korisnik,"strana":strana})
+
+    prosecnaOcena = None
+    zbirOcena = 0
+    brojOcena = 0
+
+    oceneProizvoda = Ocene.objects.filter(proizvod=stvar.id)
+    for jednaOcena in oceneProizvoda:
+        zbirOcena = zbirOcena + jednaOcena.ocena
+        brojOcena = brojOcena + 1
+    if brojOcena > 0:
+        prosecnaOcena = zbirOcena / brojOcena
+
+    return render(request, 'stvar/detalji_prodaj.html', {"stvar":stvar, "korisnik":korisnik,"strana":strana, "prosecna_ocena": prosecnaOcena, "moja_ocena":"-1"})
 
 
 
@@ -150,7 +162,55 @@ def detaljiKupi(request, id):
     korisnik = stvar.korisnik
     user = request.user
     #korisnik = User.objects.get(pk=ajdi)
-    return render(request, 'stvar/detalji_kupi.html', {"stvar":stvar, "korisnik":korisnik, "strana":strana})
+
+    mojaOcena = Ocene.objects.filter(korisnik=user.id)
+    if len(mojaOcena) == 0:
+        mojaOcena = None
+    else:
+        mojaOcena = mojaOcena.filter(proizvod=stvar.id)
+        if len(mojaOcena) == 0:
+            mojaOcena = None
+        else:
+            mojaOcena = mojaOcena[0]
+
+    if not request.user.is_authenticated:
+        mojaOcena = "-1"
+
+    prosecnaOcena = None
+    zbirOcena = 0
+    brojOcena = 0
+
+    oceneProizvoda = Ocene.objects.filter(proizvod=stvar.id)
+    for jednaOcena in oceneProizvoda:
+        zbirOcena = zbirOcena + jednaOcena.ocena
+        brojOcena = brojOcena + 1
+    if brojOcena > 0:
+        prosecnaOcena = zbirOcena / brojOcena
+
+    form = OceneFrom()
+    if request.method == 'GET':
+        return render(request, 'stvar/detalji_kupi.html', {"stvar":stvar, "korisnik":korisnik, "strana":strana, "prosecna_ocena":prosecnaOcena, "form":form, "moja_ocena":mojaOcena})
+
+    if request.method == "POST":
+        mojaOcena = request.POST['ocena']
+        ocena = Ocene()
+        ocena.korisnik = user
+        ocena.proizvod = stvar
+        ocena.ocena = mojaOcena
+        ocena.save()
+
+        prosecnaOcena = None
+        zbirOcena = 0
+        brojOcena = 0
+
+        oceneProizvoda = Ocene.objects.filter(proizvod=stvar.id)
+        for jednaOcena in oceneProizvoda:
+            zbirOcena = zbirOcena + jednaOcena.ocena
+            brojOcena = brojOcena + 1
+        if brojOcena > 0:
+            prosecnaOcena = zbirOcena / brojOcena
+        return render(request, 'stvar/detalji_kupi.html', {"stvar":stvar, "korisnik":korisnik, "strana":strana, "prosecna_ocena":prosecnaOcena, "form":form, "moja_ocena":mojaOcena})
+
 
 def obrisiStvar(request, id):
     strana=False
@@ -198,6 +258,18 @@ class UserFormView(View):
 
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+
+            #Checking if the password is valid
+            special_characters = "[~\!@#\$%\^&\*\(\)_\+{}\":;'\[\]]"
+            if len(password) < 8:
+                return render(request, self.template_name, {'form': form, "strana": strana, 'error_message': "Sifra mora imati barem 8 karaktera"})
+            if not any(char.isdigit() for char in password):
+                return render(request, self.template_name, {'form': form, "strana": strana, 'error_message': "Sifra mora imati barem jednu cifru"})
+            if not any(char.isalpha() for char in password):
+                return render(request, self.template_name, {'form': form, "strana": strana, 'error_message': "Sifra mora imati barem jedno slovo"})
+            if not any(char in special_characters for char in password):
+                return render(request, self.template_name, {'form': form, "strana": strana, 'error_message': "Sifra mora imati barem jedan specijalni karakter"})
+
             user.set_password(password)
             user.save()
 

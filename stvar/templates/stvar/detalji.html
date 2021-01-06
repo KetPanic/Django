@@ -2,6 +2,29 @@
 
 {% block content %}
     <h1>{{stvar.ime}}</h1>
+    <h5>Ocena proizvoda:</h5>
+    {% if prosecna_ocena is None %}
+        <p>Proizvod nema ocena</p>
+    {% else %}
+        <p>{{ prosecna_ocena }}</p>
+    {% endif %}
+    {% if moja_ocena is None %}
+    <h5>Oceni:</h5>
+        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'stvar/ocene_form_template.html' %}
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </form>
+    {% elif moja_ocena == "-1" %}
+        <p></p>
+    {% else %}
+        <h5>Moja ocena:</h5>
+        <p>{{moja_ocena}}</p>
+    {% endif %}
     <h5>Cena:</h5>
     <p>{{stvar.cena}}</p>
     <h5>Kategorija:</h5>

@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6cd8f70-93df-4e56-bf74-5777781b29cf" name="Default Changelist" comment="" />
+    <list default="true" id="b6cd8f70-93df-4e56-bf74-5777781b29cf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kupujemprodajem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kupujemprodajem.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kupujemprodajem/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/kupujemprodajem/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kupujemprodajem/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/kupujemprodajem/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stvar/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/stvar/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stvar/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/stvar/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stvar/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/stvar/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stvar/templates/stvar/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/stvar/templates/stvar/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stvar/templates/stvar/detalji.html" beforeDir="false" afterPath="$PROJECT_DIR$/stvar/templates/stvar/detalji.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stvar/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/stvar/views.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,10 +29,21 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1WT80yOEgsmX64zWG6Scmyfrh0Y" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../kp" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/stvar/templates/stvar" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\katarina\PycharmProjects\Django\stvar\templates\stvar" />
+      <recent name="C:\Users\katarina\PycharmProjects\Django\kupujemprodajem" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -73,5 +97,16 @@
       <updated>1579162004756</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

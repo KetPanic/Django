@@ -1,0 +1,7 @@
+<div class="form-group">
+    <select name="ocena">
+        {% for i in '12345'|make_list %}
+            <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+        {% endfor %}
+    </select>
+</div>
